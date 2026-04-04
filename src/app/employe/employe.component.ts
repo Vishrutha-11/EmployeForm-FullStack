@@ -1,5 +1,6 @@
-
-import { Component } from '@angular/core';
+// employe.component.ts
+import { Component, OnInit } from '@angular/core';
+import { EmployeService } from '../employe.service';
 import { NgForm } from '@angular/forms';
 
 @Component({
@@ -7,15 +8,49 @@ import { NgForm } from '@angular/forms';
   templateUrl: './employe.component.html',
   styleUrls: ['./employe.component.css']
 })
-export class EmployeComponent {
-onSubmit(form:any){
-  console.log(form.value);
-  console.log(this.selectedFile);
+export class EmployeComponent implements OnInit {
+employees: any[] = [];
+
+
+  constructor(private employeService: EmployeService) {}
+
+  ngOnInit() {
+  this.loadEmployees();
+}
+loadEmployees() {
+  this.employeService.getEmployees().subscribe((res: any[]) => {
+    this.employees = res;
+    console.log("Employees:", res);
+  });
 }
 
 selectedFile: File | null = null;
 
-  onFileSelect(event: any) {
-    this.selectedFile = event.target.files[0];
+onFileSelect(event: any) {
+  const file = event.target.files[0];
+  this.selectedFile = file;
+}
+ onSubmit(form: NgForm) {
+  if (form.valid) {
+
+    console.log("Form Data:", form.value);
+
+    this.employeService.addEmployee(form.value).subscribe({
+      next: (res: any) => {
+        console.log("Employee added:", res);
+        alert("Employee added successfully!");
+
+        form.reset();
+
+        this.loadEmployees();  // ✅ CORRECT PLACE
+      },
+      error: (err: any) => {
+        console.error("Error:", err);
+      }
+    });
+
+  } else {
+    console.log("Form is invalid");
   }
+}
 }

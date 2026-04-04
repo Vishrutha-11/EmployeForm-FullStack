@@ -1,93 +1,36 @@
-/* .container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 80vh;
-  font-family: 'segoe ui',Verdana, Geneva, Tahoma, sans-serif;
-  background: #f4f6f9;
+/* RESET */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+background: linear-gradient(135deg, #667eea, #764ba2);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-.form-container {
-  width: 500px;
-  margin: 50px auto;
-  padding: 30px;
-  border-radius: 10px;
-  background: #ffffff;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
-}
-
-h1 {
-  text-align: center;
-  margin-bottom: 20px;
-}
-
-label {
-  display: block;
-  margin-top: 10px;
-  font-weight: bold;
-}
-
-input, textarea {
-  width: 100%;
-  padding: 8px;
-  margin-top: 5px;
-  border-radius: 5px;
-  border: 1px solid #ccc;
-}
-
-textarea {
-  resize: none;
-  height: 80px;
-}
-
-.gender {
-  display: flex;
-  gap: 15px;
-  margin-bottom: 20px;
- 
-}
-
-button {
-  width: 100%;
-  margin-top: 15px;
-  padding: 10px;
-  background: #007bff;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-button:disabled {
-  background: gray;
-}
-
-button:hover:not(:disabled) {
-  background: #0056b3;
-}
-
-.error {
-  color: red;
-  font-size: 12px;
-} */
-
-*{
-margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    }
-      
-    
+/* BODY BACKGROUND */
 body {
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  min-height: 100vh;
   background: linear-gradient(135deg, #667eea, #764ba2);
 }
 
+/* MAIN WRAPPER */
+.main-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px 0;
+  gap: 30px;
+}
+
+/* FORM OUTER CONTAINER */
 .container {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+/* GLASS FORM BOX */
+.form-container {
   width: 500px;
   background: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(15px);
@@ -98,6 +41,7 @@ body {
   animation: fadeIn 1s ease-in-out;
 }
 
+/* ANIMATION */
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -109,12 +53,15 @@ body {
   }
 }
 
-h2 {
+/* HEADINGS */
+h1, h2 {
   text-align: center;
   margin-bottom: 20px;
   font-family: Georgia, 'Times New Roman', Times, serif;
+  color: #fff;
 }
 
+/* INPUT GROUP */
 .input-group {
   position: relative;
   margin-bottom: 20px;
@@ -131,10 +78,12 @@ h2 {
   color: #fff;
 }
 
+/* FLOAT LABEL */
 .input-group label {
   position: absolute;
   top: 50%;
   left: 10px;
+  background: none;
   transform: translateY(-50%);
   font-size: 14px;
   color: #ddd;
@@ -149,10 +98,9 @@ h2 {
   top: -8px;
   font-size: 12px;
   color: #fff;
-  padding: 0 5px;
-  border-radius: 5px;
 }
 
+/* GENDER */
 .gender {
   margin-bottom: 20px;
 }
@@ -161,12 +109,13 @@ h2 {
   margin-right: 15px;
 }
 
+/* FILE INPUT */
 input[type="file"] {
   margin-bottom: 20px;
   color: #fff;
-  
 }
 
+/* BUTTON */
 button {
   width: 100%;
   padding: 12px;
@@ -184,15 +133,70 @@ button:hover {
   box-shadow: 0 5px 15px rgba(0,0,0,0.3);
 }
 
-@media(max-width: 450px) {
-  .container {
-    width: 90%;
-  }
-}
-
-
+/* ERROR */
 .error {
-  color: red;
+  color: #ff4d4d;
   font-size: 12px;
   margin-bottom: 5px;
+}
+
+/* VALIDATION */
+input.ng-invalid.ng-touched {
+  border: 1px solid red;}
+
+input.ng-valid.ng-touched {
+  border: 1px solid green;
+}
+
+/* TABLE CONTAINER */
+.table-container {
+  width: 100%;
+  max-width: 1500px;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(15px);
+  border-radius: 15px;
+  padding: 20px;
+  color: #fff;
+}
+
+/* TABLE */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+/* HEADER */
+th {
+  background-color: #4CAF50;
+  color: white;
+  padding: 12px;
+}
+
+/* CELLS */
+td {
+  padding: 10px;
+  text-align: center;
+  border-bottom: 1px solid rgba(255,255,255,0.2);
+}
+
+/* HOVER EFFECT */
+tr:hover {
+  background-color: rgba(255,255,255,0.1);
+}
+
+/* EMPTY ROW */
+td[colspan] {
+  text-align: center;
+}
+
+/* RESPONSIVE */
+@media(max-width: 450px) {
+  .form-container {
+    width: 90%;
+  }
+
+  .table-container {
+    width: 95%;
+  }
 }

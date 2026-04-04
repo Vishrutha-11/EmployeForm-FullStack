@@ -1,105 +1,94 @@
-<!-- <body>  <div class="container">
-    <h2>Employee Form</h2><form>
-  <div class="input-group">
-    <input type="text" required>
-    <label>Name</label>
-  </div>
+<div class="main-wrapper">
 
-  <div class="input-group">
-    <input type="tel" required>
-    <label>Phone Number</label>
-  </div>
-
-  <div class="input-group">
-    <input type="text" required>
-    <label>Department</label>
-  </div>
-
-  <div class="input-group">
-    <textarea rows="3" required></textarea>
-    <label>Address</label>
-  </div>
-
-  <div class="gender">
-    <span>Gender:</span><br>
-    <label><input type="radio" name="gender"> Male</label>
-    <label><input type="radio" name="gender"> Female</label>
-  </div>
-
-  <input type="file">
-
-  <button type="submit">Submit</button>
-</form>
-
-  </div></body> -->
-<body>
+  <!-- FORM -->
   <div class="container">
-  <h2>Employee Form</h2>
+    <div class="form-container">
+      <h1>Employee Form</h1>
 
-  <form #empForm="ngForm" (ngSubmit)="onSubmit(empForm)">
+      <form #empForm="ngForm" (ngSubmit)="onSubmit(empForm)">
 
-    <!-- NAME -->
-    <div class="input-group">
-      <input type="text" name="name" ngModel required #name="ngModel">
-      <label>Name</label>
-    </div>
-    <div class="error" *ngIf="name.invalid && name.touched">
-      Name is required
-    </div>
+        <!-- NAME -->
+        <div class="input-group">
+          <input type="text" name="name" ngModel required #name="ngModel">
+          <label>Name</label>
+        </div>
+        <div class="error" *ngIf="name.invalid && name.touched">
+          Name is required
+        </div>
 
-    <!-- PHONE -->
-    <div class="input-group">
-      <input type="tel" name="phoneNumber" ngModel required pattern="[0-9]{10}" #phone="ngModel">
-      <label>Phone Number</label>
-    </div>
-    <div class="error" *ngIf="phone.invalid && phone.touched">
-      Enter valid 10-digit phone number
-    </div>
+        <!-- PHONE -->
+        <div class="input-group">
+          <input type="tel" name="phoneNumber" ngModel required pattern="[0-9]{10}" #phone="ngModel">
+          <label>Phone Number</label>
+        </div>
+        <div class="error" *ngIf="phone.invalid && phone.touched">
+          Enter valid 10-digit phone number
+        </div>
 
-    <!-- DEPARTMENT -->
-    <div class="input-group">
-      <input type="text" name="empDept" ngModel required #dept="ngModel">
-      <label>Department</label>
-    </div>
-    <div class="error" *ngIf="dept.invalid && dept.touched">
-      Department is required
-    </div>
+        <!-- DEPARTMENT -->
+        <div class="input-group">
+          <input type="text" name="empDept" ngModel required #dept="ngModel">
+          <label>Department</label>
+        </div>
 
-    <!-- ADDRESS -->
-    <div class="input-group">
-      <textarea rows="3" name="address" ngModel required #address="ngModel"></textarea>
-      <label>Address</label>
-    </div>
-    <div class="error" *ngIf="address.invalid && address.touched">
-      Address is required
-    </div>
+        <!-- ADDRESS -->
+        <div class="input-group">
+          <textarea rows="3" name="address" ngModel required #address="ngModel"></textarea>
+          <label>Address</label>
+        </div>
 
-    <!-- GENDER -->
-    <div class="gender">
-      <span>Gender:</span><br>
-      <label>
-        <input type="radio" name="gender" value="Male" ngModel required #gender="ngModel"> Male
-      </label>
-      <label>
-        <input type="radio" name="gender" value="Female" ngModel> Female
-      </label>
-    </div>
-    <div class="error" *ngIf="gender.invalid && gender.touched">
-      Gender is required
-    </div>
+        <!-- GENDER -->
+        <div class="gender">
+          <span>Gender:</span><br>
+          <label><input type="radio" name="gender" value="Male" ngModel required> Male</label>
+          <label><input type="radio" name="gender" value="Female" ngModel> Female</label>
+        </div>
 
-    <!-- FILE -->
-    <div class="input-group">
-      <input type="file" (change)="onFileSelect($event)" required #file="ngModel" ngModel name="files">
-    </div>
-    <div class="error" *ngIf="file.invalid && file.touched">
-      File is required
-    </div>
+        <!-- FILE -->
+        <div class="input-group">
+          <input type="file" (change)="onFileSelect($event)" required ngModel name="files">
+        </div>
 
-    <!-- BUTTON -->
-    <button type="submit" [disabled]="empForm.invalid">Submit</button>
+        <!-- BUTTON -->
+        <button type="submit" [disabled]="empForm.invalid">Submit</button>
 
-  </form>
+      </form>
+    </div>
+  </div>
+
+  <!-- TABLE -->
+  <div class="table-container">
+    <h2>Employee List</h2>
+
+    <table>
+      <thead>
+        <tr>
+          <th>EmpId</th>
+          <th>Name</th>
+          <th>Phone Number</th>
+          <th>Department</th>
+          <th>Address</th>
+          <th>Gender</th>
+          <th>Files</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr *ngFor="let emp of employees">
+          <td>{{ emp.empId }}</td>
+          <td>{{ emp.name }}</td>
+          <td>{{ emp.phoneNum }}</td>
+          <td>{{ emp.empDept }}</td>
+          <td>{{ emp.address }}</td>
+          <td>{{ emp.gender }}</td>
+          <td>{{ emp.files }}</td>
+        </tr>
+
+        <tr *ngIf="employees.length === 0">
+          <td colspan="7">No data found</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
 </div>
-
-</body>
