@@ -1,4 +1,4 @@
-<body>  <div class="container">
+<!-- <body>  <div class="container">
     <h2>Employee Form</h2><form>
   <div class="input-group">
     <input type="text" required>
@@ -31,4 +31,75 @@
   <button type="submit">Submit</button>
 </form>
 
-  </div></body>
+  </div></body> -->
+<body>
+  <div class="container">
+  <h2>Employee Form</h2>
+
+  <form #empForm="ngForm" (ngSubmit)="onSubmit(empForm)">
+
+    <!-- NAME -->
+    <div class="input-group">
+      <input type="text" name="name" ngModel required #name="ngModel">
+      <label>Name</label>
+    </div>
+    <div class="error" *ngIf="name.invalid && name.touched">
+      Name is required
+    </div>
+
+    <!-- PHONE -->
+    <div class="input-group">
+      <input type="tel" name="phoneNumber" ngModel required pattern="[0-9]{10}" #phone="ngModel">
+      <label>Phone Number</label>
+    </div>
+    <div class="error" *ngIf="phone.invalid && phone.touched">
+      Enter valid 10-digit phone number
+    </div>
+
+    <!-- DEPARTMENT -->
+    <div class="input-group">
+      <input type="text" name="empDept" ngModel required #dept="ngModel">
+      <label>Department</label>
+    </div>
+    <div class="error" *ngIf="dept.invalid && dept.touched">
+      Department is required
+    </div>
+
+    <!-- ADDRESS -->
+    <div class="input-group">
+      <textarea rows="3" name="address" ngModel required #address="ngModel"></textarea>
+      <label>Address</label>
+    </div>
+    <div class="error" *ngIf="address.invalid && address.touched">
+      Address is required
+    </div>
+
+    <!-- GENDER -->
+    <div class="gender">
+      <span>Gender:</span><br>
+      <label>
+        <input type="radio" name="gender" value="Male" ngModel required #gender="ngModel"> Male
+      </label>
+      <label>
+        <input type="radio" name="gender" value="Female" ngModel> Female
+      </label>
+    </div>
+    <div class="error" *ngIf="gender.invalid && gender.touched">
+      Gender is required
+    </div>
+
+    <!-- FILE -->
+    <div class="input-group">
+      <input type="file" (change)="onFileSelect($event)" required #file="ngModel" ngModel name="files">
+    </div>
+    <div class="error" *ngIf="file.invalid && file.touched">
+      File is required
+    </div>
+
+    <!-- BUTTON -->
+    <button type="submit" [disabled]="empForm.invalid">Submit</button>
+
+  </form>
+</div>
+
+</body>
