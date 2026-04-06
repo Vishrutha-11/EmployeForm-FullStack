@@ -26,10 +26,49 @@
         </div>
 
         <!-- DEPARTMENT -->
-        <div class="input-group">
-          <input type="text" name="empDept" ngModel required #dept="ngModel">
-          <label>Department</label>
-        </div>
+       <!-- DEPARTMENT
+<div class="input-group">
+  <select name="empDept" ngModel required #dept="ngModel">
+    <option value="" disabled selected>Select Department</option>
+    <option value="HR">HR</option>
+    <option value="IT">IT</option>
+    <option value="Finance">Finance</option>
+    <option value="Sales">Sales</option>
+  </select>
+  <label>Department</label>
+</div>
+
+<div class="error" *ngIf="dept.invalid && dept.touched">
+  Department is required
+</div>
+
+<select name="deptId" ngModel required>
+  <option *ngFor="let d of departments" [value]="d.deptID">
+    {{ d.name }}
+  </option>
+</select> -->
+<div class="input-group">
+<select 
+  [(ngModel)]="employee.deptId" 
+  name="deptId" 
+  #dept="ngModel" 
+  required>
+  
+  <option value="" disabled>Select Department</option>
+
+  <option *ngFor="let d of departments" [value]="d.deptId">
+    {{ d.name }}
+  </option>
+</select>
+
+  <label>Department</label>
+</div>
+
+<div class="error" *ngIf="dept.invalid && dept.touched">
+  Department is required
+</div>
+
+
 
         <!-- ADDRESS -->
         <div class="input-group">
@@ -83,7 +122,8 @@
           <th>EmpId</th>
           <th>Name</th>
           <th>PhoneNumber</th>
-          <th>Department</th>
+          <th>EmpDept
+          </th>
           <th>Address</th>
           <th>Gender</th>
           <th>Files</th>
@@ -95,7 +135,7 @@
           <td>{{ emp.empId }}</td>
           <td>{{ emp.name }}</td>
           <td>{{ emp.phoneNumber }}</td>
-          <td>{{ emp.empDept }}</td>
+         <td>{{ emp.empDept }}</td>
           <td>{{ emp.address }}</td>
           <td>{{ emp.gender }}</td>
           <td>{{ emp.files }}</td>

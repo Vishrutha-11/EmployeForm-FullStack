@@ -18,5 +18,9 @@ export class EmployeService {
   getEmployees() {
     return this.http.get<any[]>('https://localhost:7120/api/EmpolyeeForm/GetEmploye');
   }
+
+getDepartments() {
+  return this.http.get<any[]>('https://localhost:7120/api/EmpolyeeForm/GetDepartments');
+}
 }
 

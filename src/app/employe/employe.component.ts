@@ -10,12 +10,28 @@ import { NgForm } from '@angular/forms';
 })
 export class EmployeComponent implements OnInit {
 employees: any[] = [];
-
-
+departments: any[] = [];
+selectedDeptId: number | null = null;
   constructor(private employeService: EmployeService) {}
 
+
+employee: any = {
+    name: '',
+    phoneNumber: '',
+    address: '',
+    gender: '',
+    files: '',
+    deptId: ''
+  };
   ngOnInit() {
   this.loadEmployees();
+  this.getDepartments();
+}
+getDepartments() {
+  this.employeService.getDepartments().subscribe((res: any) => {
+    console.log("Departments API Response:", res);
+    this.departments = res; // ✅ FIXED
+  });
 }
 loadEmployees() {
   this.employeService.getEmployees().subscribe((res: any[]) => {
@@ -30,7 +46,8 @@ onFileSelect(event: any) {
   const file = event.target.files[0];
   this.selectedFile = file;
 }
-//  onSubmit(form: NgForm) {
+
+// onSubmit(form: NgForm) {
 //   if (form.valid) {
 
 //     console.log("Form Data:", form.value);
@@ -40,17 +57,8 @@ onFileSelect(event: any) {
 //         console.log("Employee added:", res);
 //         alert("Employee added successfully!");
 
-//         form.reset();
-
-//         this.loadEmployees();  // ✅ CORRECT PLACE
-      
-//   //      console.log(this.employee);  // gender should be 0 or 1
-
-//   // this.employeService.addEmployee(this.employee).subscribe(res => {
-//   //   console.log('Saved successfully');
-//   //});
-      
-      
+//         form.reset();           // ✅ only here
+//         this.loadEmployees();   // ✅ only here
 //       },
 //       error: (err: any) => {
 //         console.error("Error:", err);
@@ -60,30 +68,28 @@ onFileSelect(event: any) {
 //   } else {
 //     console.log("Form is invalid");
 //   }
-//   form.reset();
-//   this.loadEmployees();
 // }
+
 
 onSubmit(form: NgForm) {
   if (form.valid) {
 
-    console.log("Form Data:", form.value);
+    const data = {
+      ...form.value,
+      files: this.selectedFile ? this.selectedFile.name : ''
+    };
 
-    this.employeService.addEmployee(form.value).subscribe({
+    this.employeService.addEmployee(data).subscribe({
       next: (res: any) => {
-        console.log("Employee added:", res);
         alert("Employee added successfully!");
-
-        form.reset();           // ✅ only here
-        this.loadEmployees();   // ✅ only here
+        form.reset();
+        this.loadEmployees();
       },
       error: (err: any) => {
         console.error("Error:", err);
       }
     });
 
-  } else {
-    console.log("Form is invalid");
   }
 }
 }
