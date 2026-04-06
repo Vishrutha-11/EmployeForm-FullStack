@@ -40,20 +40,30 @@
         <!-- GENDER -->
         <div class="gender">
           <span>Gender:</span><br>
-  <label>
-      <input type="radio" name="gender" value="Male" ngModel required #gender="ngModel">
-      Male
-    </label>
+      <label>
+  <input 
+    type="radio" 
+    name="gender" 
+    value="Male" 
+    ngModel 
+    required>
+  Male
+</label>
 
-    <label>
-      <input type="radio" name="gender" value="Female" ngModel required>
-      Female
-    </label> 
+<label>
+  <input 
+    type="radio" 
+    name="gender" 
+    value="Female" 
+    ngModel>
+  Female
+</label>
         </div>
 
         <!-- FILE -->
         <div class="input-group">
-          <input type="file" (change)="onFileSelect($event)" required ngModel name="files">
+          <!-- <input type="file" (change)="onFileSelect($event)" required ngModel name="files"> -->
+           <input type="text" name="files" ngModel placeholder="File name">
         </div>
 
         <!-- BUTTON -->
