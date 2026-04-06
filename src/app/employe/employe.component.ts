@@ -43,6 +43,14 @@ onFileSelect(event: any) {
         form.reset();
 
         this.loadEmployees();  // ✅ CORRECT PLACE
+      
+  //      console.log(this.employee);  // gender should be 0 or 1
+
+  // this.employeService.addEmployee(this.employee).subscribe(res => {
+  //   console.log('Saved successfully');
+  //});
+      
+      
       },
       error: (err: any) => {
         console.error("Error:", err);
@@ -52,5 +60,12 @@ onFileSelect(event: any) {
   } else {
     console.log("Form is invalid");
   }
+  form.reset();
+  this.loadEmployees();
 }
+
+// employee = {
+//   name: '',
+//   gender: null  // should match bit (0/1)
+// };
 }
