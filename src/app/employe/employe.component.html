@@ -27,9 +27,9 @@
 
        
 <!-- department -->
-<div class="input-group">
+<div class="input-group dept-group">
 <select name="deptId" ngModel #dept="ngModel" required>
-  <option value="" disabled selected>Select Department</option>
+  <option value="" disabled selected>Select</option>
   <option *ngFor="let d of departments" [value]="d.deptId">
     {{ d.name }}
   </option>

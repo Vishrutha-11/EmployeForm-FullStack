@@ -1,16 +1,18 @@
-/* RESET */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-background: linear-gradient(135deg, #667eea, #764ba2);
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
-
-/* BODY BACKGROUND */
 body {
   min-height: 100vh;
-  background: linear-gradient(135deg, #667eea, #764ba2);
+  background: linear-gradient(135deg, #fffaf5, #f3e9dc, #e8dccc);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  position: relative;
+}
+
+body::before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle, rgba(0,0,0,0.03) 1px, transparent 1px);
+  background-size: 25px 25px;
+  pointer-events: none;
 }
 
 /* MAIN WRAPPER */
@@ -29,23 +31,22 @@ body {
   width: 100%;
 }
 
-/* GLASS FORM BOX */
+/* FORM CARD (CLEAN UI) */
 .form-container {
   width: 500px;
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(15px);
-  border-radius: 15px;
+  background: #ffffff;
+  border-radius: 12px;
   padding: 30px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-  color: #fff;
-  animation: fadeIn 1s ease-in-out;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+  color: #333;
+  animation: fadeIn 0.8s ease-in-out;
 }
 
 /* ANIMATION */
 @keyframes fadeIn {
   from {
     opacity: 0;
-    transform: translateY(20px);
+    transform: translateY(15px);
   }
   to {
     opacity: 1;
@@ -58,7 +59,7 @@ h1, h2 {
   text-align: center;
   margin-bottom: 20px;
   font-family: Georgia, 'Times New Roman', Times, serif;
-  color: #fff;
+  color: #4a3f35;
 }
 
 /* INPUT GROUP */
@@ -66,100 +67,79 @@ h1, h2 {
   position: relative;
   margin-bottom: 20px;
 }
-/* 
+
+/* INPUT FIELDS */
 .input-group input,
-.input-group textarea {
-  width: 100%;
-  padding: 10px;
-  border: none;
-  outline: none;
-  border-radius: 8px;
-  background: rgba(255,255,255,0.2);
-  color: #fff;
-} */
- .input-group input,
 .input-group textarea,
 .input-group select {
   width: 100%;
   padding: 10px;
-  border: none;
-  outline: none;
+  border: 1px solid #e0d6cc;
   border-radius: 8px;
-  background: rgba(255,255,255,0.2);
-  color: black;
+  background: #fff;
+  color: #333;
+  outline: none;
+  transition: 0.3s;
 }
 
+/* FOCUS EFFECT */
+.input-group input:focus,
+.input-group textarea:focus,
+.input-group select:focus {
+  border-color: #b08968;
+}
 
+/* LABEL */
+.input-group label {
+  position: absolute;
+  top: 50%;
+  left: 10px;
+  transform: translateY(-50%);
+  font-size: 14px;
+  color: #8b7d74;
+  pointer-events: none;
+  transition: 0.3s;
+  background: #fff;
+  padding: 0 4px;
+}
+
+/* FLOAT LABEL */
+.input-group input:focus + label,
+.input-group input:valid + label,
+.input-group textarea:focus + label,
+.input-group textarea:valid + label,
+.input-group select:focus + label,
+.input-group select:valid + label {
+  top: -8px;
+  font-size: 12px;
+  color: #b08968;
+}
+
+/* DROPDOWN STYLE */
 .input-group select {
   appearance: none;
-  -webkit-appearance: none;
-  -moz-appearance: none;
   cursor: pointer;
 }
 
-
-.input-group::after {
+/* DEPARTMENT ARROW */
+.dept-group::after {
   content: "▼";
   position: absolute;
   right: 15px;
   top: 50%;
   transform: translateY(-50%);
-  color:white;
+  color: #b08968;
   pointer-events: none;
-}
-
-
-
-
-.input-group select:focus + label,
-.input-group select:valid + label {
-  top: -8px;
-  font-size: 12px;
-  color:pink;
-}
-
-.input-group select:focus + label,
-.input-group select:valid + label {
-  top: -8px;
-  font-size: 12px;
-  color: white;
-}
-
-/* FLOAT LABEL */
-.input-group label {
-  position: absolute;
-  top: 50%;
-  left: 10px;
-  background: none;
-  transform: translateY(-50%);
-  font-size: 14px;
-  color: #ddd;
-  pointer-events: none;
-  transition: 0.3s;
-}
-
-.input-group input:focus + label,
-.input-group input:valid + label,
-.input-group textarea:focus + label,
-.input-group textarea:valid + label {
-  top: -8px;
-  font-size: 12px;
-  color: #fff;
 }
 
 /* GENDER */
 .gender {
   margin-bottom: 20px;
+  color: #444;
 }
 
 .gender label {
   margin-right: 15px;
-}
-
-/* FILE INPUT */
-input[type="file"] {
-  margin-bottom: 20px;
-  color: #fff;
 }
 
 /* BUTTON */
@@ -168,7 +148,7 @@ button {
   padding: 12px;
   border: none;
   border-radius: 8px;
-  background: linear-gradient(45deg, #00c6ff, #0072ff);
+  background: #b08968;
   color: #fff;
   font-size: 16px;
   cursor: pointer;
@@ -176,34 +156,34 @@ button {
 }
 
 button:hover {
-  transform: scale(1.05);
-  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+  background: #9c6644;
 }
 
 /* ERROR */
 .error {
-  color: #ff4d4d;
+  color: #d9534f;
   font-size: 12px;
   margin-bottom: 5px;
 }
 
 /* VALIDATION */
 input.ng-invalid.ng-touched {
-  border: 1px solid red;}
+  border: 1px solid #d9534f;
+}
 
 input.ng-valid.ng-touched {
-  border: 1px solid green;
+  border: 1px solid #5cb85c;
 }
 
 /* TABLE CONTAINER */
 .table-container {
   width: 100%;
-  max-width: 1500px;
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(15px);
-  border-radius: 15px;
+  max-width: 1200px;
+  background: #ffffff;
+  border-radius: 12px;
   padding: 20px;
-  color: #fff;
+  color: #333;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.05);
 }
 
 /* TABLE */
@@ -215,7 +195,7 @@ table {
 
 /* HEADER */
 th {
-  background-color: #4CAF50;
+  background-color: #b08968;
   color: white;
   padding: 12px;
 }
@@ -224,12 +204,225 @@ th {
 td {
   padding: 10px;
   text-align: center;
-  border-bottom: 1px solid rgba(255,255,255,0.2);
+  border-bottom: 1px solid #eee;
 }
 
-/* HOVER EFFECT */
+/* HOVER */
 tr:hover {
-  background-color: rgba(255,255,255,0.1);
+  background-color: #f9f3ee;
+}
+
+/* EMPTY ROW */
+td[colspan] {
+  text-align: center;
+}
+
+/* RESPONSIVE */
+@media(max-width: 450px) {
+  .form-container {
+    width: 90%;
+  }
+
+  .table-container {
+    width: 95%;
+  }
+}
+
+/* MAIN WRAPPER */
+.main-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px 0;
+  gap: 30px;
+}
+
+/* FORM OUTER CONTAINER */
+.container {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+/* FORM CARD (CLEAN UI) */
+.form-container {
+  width: 500px;
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 30px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+  color: #333;
+  animation: fadeIn 0.8s ease-in-out;
+}
+
+/* ANIMATION */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* HEADINGS */
+h1, h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  color: #4a3f35;
+}
+
+/* INPUT GROUP */
+.input-group {
+  position: relative;
+  margin-bottom: 20px;
+}
+
+/* INPUT FIELDS */
+.input-group input,
+.input-group textarea,
+.input-group select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #e0d6cc;
+  border-radius: 8px;
+  background: #fff;
+  color: #333;
+  outline: none;
+  transition: 0.3s;
+}
+
+/* FOCUS EFFECT */
+.input-group input:focus,
+.input-group textarea:focus,
+.input-group select:focus {
+  border-color: #b08968;
+}
+
+/* LABEL */
+.input-group label {
+  position: absolute;
+  top: 50%;
+  left: 10px;
+  transform: translateY(-50%);
+  font-size: 14px;
+  color: #8b7d74;
+  pointer-events: none;
+  transition: 0.3s;
+  background: #fff;
+  padding: 0 4px;
+}
+
+/* FLOAT LABEL */
+.input-group input:focus + label,
+.input-group input:valid + label,
+.input-group textarea:focus + label,
+.input-group textarea:valid + label,
+.input-group select:focus + label,
+.input-group select:valid + label {
+  top: -8px;
+  font-size: 12px;
+  color: #b08968;
+}
+
+/* DROPDOWN STYLE */
+.input-group select {
+  appearance: none;
+  cursor: pointer;
+}
+
+/* DEPARTMENT ARROW */
+.dept-group::after {
+  content: "▼";
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #b08968;
+  pointer-events: none;
+}
+
+/* GENDER */
+.gender {
+  margin-bottom: 20px;
+  color: #444;
+}
+
+.gender label {
+  margin-right: 15px;
+}
+
+/* BUTTON */
+button {
+  width: 100%;
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  background: #b08968;
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+button:hover {
+  background: #9c6644;
+}
+
+/* ERROR */
+.error {
+  color: #d9534f;
+  font-size: 12px;
+  margin-bottom: 5px;
+}
+
+/* VALIDATION */
+input.ng-invalid.ng-touched {
+  border: 1px solid #d9534f;
+}
+
+input.ng-valid.ng-touched {
+  border: 1px solid #5cb85c;
+}
+
+/* TABLE CONTAINER */
+.table-container {
+  width: 100%;
+  max-width: 1200px;
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 20px;
+  color: #333;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+}
+
+/* TABLE */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+/* HEADER */
+th {
+  background-color: #b08968;
+  color: white;
+  padding: 12px;
+}
+
+/* CELLS */
+td {
+  padding: 10px;
+  text-align: center;
+  border-bottom: 1px solid #eee;
+}
+
+/* HOVER */
+tr:hover {
+  background-color: #f9f3ee;
 }
 
 /* EMPTY ROW */

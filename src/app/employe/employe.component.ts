@@ -12,6 +12,10 @@ export class EmployeComponent implements OnInit {
 employees: any[] = [];
 departments: any[] = [];
 selectedDeptId: number | null = null;
+
+
+successMessage = '';
+errorMessage = '';
   constructor(private employeService: EmployeService) {}
 
 
@@ -56,21 +60,35 @@ onSubmit(form: NgForm) {
     };
 
     this.employeService.addEmployee(data).subscribe({
-      next: (res: any) => {
-        alert("Employee added successfully!");
-        console.log("Employee added:");
+    next: (res: any) => {
+  console.log("SUCCESS RESPONSE 👉", res);
 
-        form.resetForm();
-        this.loadEmployees();
-      },
-      error: (err: any) => {
-        if (err.error.includes("Phone number already exists")) {
+  // ✅ ONLY ONE ALERT
+  alert("Employee added successfully! ✅");
+
+  form.resetForm();
+  this.loadEmployees();
+},
+   error: (err: any) => {
+  
+  console.log("ERROR 👉", err.error);
+
+  let errorMsg = '';
+
+  // ✅ handle both string and object
+  if (typeof err.error === 'string') {
+    errorMsg = err.error;
+  } else if (err.error && err.error.message) {
+    errorMsg = err.error.message;
+  }
+
+  // ✅ correct alert
+  if (errorMsg.includes("Phone number already exists")) {
     alert("Phone number already exists ❌");
   } else {
     alert("Something went wrong ❌");
   }
-  console.error("Error Body:", err.error);
-      }    
+}   
 });
 
   }
