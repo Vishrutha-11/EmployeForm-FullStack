@@ -5,14 +5,14 @@
     <div class="form-container">
       <h1>Employee Form</h1>
 
-     <form #empForm="ngForm" (ngSubmit)="onSubmit(empForm); $event.preventDefault()">
+      <form #empForm="ngForm" (ngSubmit)="onSubmit(empForm); $event.preventDefault()">
 
         <!-- NAME -->
         <div class="input-group">
           <input type="text" name="name" ngModel required #name="ngModel">
           <label>Name</label>
         </div>
-        <div class="error" *ngIf="name.invalid && name.touched">
+        <div class="error" *ngIf="name.invalid && (name.touched || submitted)">
           Name is required
         </div>
 
@@ -21,26 +21,26 @@
           <input type="tel" name="phoneNumber" ngModel required pattern="[0-9]{10}" #phone="ngModel">
           <label>Phone Number</label>
         </div>
-        <div class="error" *ngIf="phone.invalid && phone.touched">
+        <div class="error" *ngIf="phone.invalid && (phone.touched || submitted)">
           Enter valid 10-digit phone number
         </div>
 
-       
-<!-- department -->
-<div class="input-group dept-group">
-<select name="deptId" ngModel #dept="ngModel" required>
-  <option value="" disabled selected>Select</option>
-  <option *ngFor="let d of departments" [value]="d.deptId">
-    {{ d.name }}
-  </option>
-</select>
 
-  <label>Department</label>
-</div>
+        <!-- department -->
+        <div class="input-group dept-group">
+          <select name="deptId" ngModel #dept="ngModel" required>
+            <option value="" disabled selected>Select</option>
+            <option *ngFor="let d of departments" [value]="d.deptId">
+              {{ d.name }}
+            </option>
+          </select>
 
-<div class="error" *ngIf="dept.invalid && dept.touched">
-  Department is required
-</div>
+          <label>Department</label>
+        </div>
+
+        <div class="error" *ngIf="dept.invalid && (dept.touched || submitted)">
+          Department is required
+        </div>
 
 
 
@@ -49,51 +49,35 @@
           <textarea rows="3" name="address" ngModel required #address="ngModel"></textarea>
           <label>Address</label>
         </div>
-
+        <div class="error" *ngIf="address.invalid && (address.touched || submitted)">
+          Address is required
+        </div>
         <!-- GENDER -->
         <div class="gender">
           <span>Gender:</span><br>
-      <label>
-  <input 
-    type="radio" 
-    name="gender" 
-    [value]="true" 
-    ngModel 
-    required>
-  Male
-</label>
-
-<label>
-  <input 
-    type="radio" 
-    name="gender" 
-    [value]="false" 
-    ngModel>
-  Female
-</label>
+          <label> <input type="radio" name="gender" [value]="true" ngModel required>Male</label>
+          <label> <input type="radio" name="gender" [value]="false" ngModel>Female</label>
         </div>
 
         <!-- FILE -->
+        <span>File:</span><br>
         <div class="input-group">
-          <!-- <input type="file" (change)="onFileSelect($event)" required ngModel name="files"> -->
-           <input type="text" name="files" ngModel placeholder="File name">
+          <input type="file" (change)="onFileSelect($event)">
         </div>
 
-        <!-- BUTTON -->
-        <button tyHpe="submit" [disabled]="empForm.invalid">Submit</button>
+        <div class="error" *ngIf="!selectedFile && submitted">
+          File is required
+        </div>
 
+        <button type="submit">
+          Submit
+        </button>
       </form>
-
-
-      <div *ngIf="successMessage" style="color:green;">
-  {{ successMessage }}
-</div>
-
-<div *ngIf="errorMessage" style="color:red;">
-  {{ errorMessage }}
-</div>
     </div>
   </div>
+
+
+
 
   <!-- TABLE -->
   <div class="table-container">
@@ -118,9 +102,9 @@
           <td>{{ emp.empId }}</td>
           <td>{{ emp.name }}</td>
           <td>{{ emp.phoneNumber }}</td>
-         <td>{{ emp.empDept }}</td>
+          <td>{{ emp.empDept }}</td>
           <td>{{ emp.address }}</td>
-         <td>{{ emp.gender ? 'Male' : 'Female' }}</td>
+          <td>{{ emp.gender ? 'Male' : 'Female' }}</td>
           <td>{{ emp.files }}</td>
         </tr>
 
