@@ -57,7 +57,7 @@
   <input 
     type="radio" 
     name="gender" 
-    value="Male" 
+    [value]="true" 
     ngModel 
     required>
   Male
@@ -67,7 +67,7 @@
   <input 
     type="radio" 
     name="gender" 
-    value="Female" 
+    [value]="false" 
     ngModel>
   Female
 </label>
@@ -111,7 +111,7 @@
           <td>{{ emp.phoneNumber }}</td>
          <td>{{ emp.empDept }}</td>
           <td>{{ emp.address }}</td>
-          <td>{{ emp.gender }}</td>
+         <td>{{ emp.gender ? 'Male' : 'Female' }}</td>
           <td>{{ emp.files }}</td>
         </tr>
 
