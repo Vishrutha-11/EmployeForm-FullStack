@@ -5,7 +5,7 @@
     <div class="form-container">
       <h1>Employee Form</h1>
 
-      <form #empForm="ngForm" (ngSubmit)="onSubmit(empForm)">
+     <form #empForm="ngForm" (ngSubmit)="onSubmit(empForm); $event.preventDefault()">
 
         <!-- NAME -->
         <div class="input-group">
@@ -25,37 +25,11 @@
           Enter valid 10-digit phone number
         </div>
 
-        <!-- DEPARTMENT -->
-       <!-- DEPARTMENT
+       
+<!-- department -->
 <div class="input-group">
-  <select name="empDept" ngModel required #dept="ngModel">
-    <option value="" disabled selected>Select Department</option>
-    <option value="HR">HR</option>
-    <option value="IT">IT</option>
-    <option value="Finance">Finance</option>
-    <option value="Sales">Sales</option>
-  </select>
-  <label>Department</label>
-</div>
-
-<div class="error" *ngIf="dept.invalid && dept.touched">
-  Department is required
-</div>
-
-<select name="deptId" ngModel required>
-  <option *ngFor="let d of departments" [value]="d.deptID">
-    {{ d.name }}
-  </option>
-</select> -->
-<div class="input-group">
-<select 
-  [(ngModel)]="employee.deptId" 
-  name="deptId" 
-  #dept="ngModel" 
-  required>
-  
-  <option value="" disabled>Select Department</option>
-
+<select name="deptId" ngModel #dept="ngModel" required>
+  <option value="" disabled selected>Select Department</option>
   <option *ngFor="let d of departments" [value]="d.deptId">
     {{ d.name }}
   </option>

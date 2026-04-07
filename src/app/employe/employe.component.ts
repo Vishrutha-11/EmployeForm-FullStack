@@ -47,30 +47,6 @@ onFileSelect(event: any) {
   this.selectedFile = file;
 }
 
-// onSubmit(form: NgForm) {
-//   if (form.valid) {
-
-//     console.log("Form Data:", form.value);
-
-//     this.employeService.addEmployee(form.value).subscribe({
-//       next: (res: any) => {
-//         console.log("Employee added:", res);
-//         alert("Employee added successfully!");
-
-//         form.reset();           // ✅ only here
-//         this.loadEmployees();   // ✅ only here
-//       },
-//       error: (err: any) => {
-//         console.error("Error:", err);
-//       }
-//     });
-
-//   } else {
-//     console.log("Form is invalid");
-//   }
-// }
-
-
 onSubmit(form: NgForm) {
   if (form.valid) {
 
@@ -82,14 +58,84 @@ onSubmit(form: NgForm) {
     this.employeService.addEmployee(data).subscribe({
       next: (res: any) => {
         alert("Employee added successfully!");
-        form.reset();
+        console.log("Employee added:");
+
+        form.resetForm();
         this.loadEmployees();
       },
       error: (err: any) => {
-        console.error("Error:", err);
-      }
-    });
+        if (err.error.includes("Phone number already exists")) {
+    alert("Phone number already exists ❌");
+  } else {
+    alert("Something went wrong ❌");
+  }
+  console.error("Error Body:", err.error);
+      }    
+});
 
   }
 }
 }
+
+
+// import { Component, OnInit } from '@angular/core';
+// import { EmployeService } from '../employe.service';
+// import { NgForm } from '@angular/forms';
+
+// @Component({
+//   selector: 'app-employe-form',
+//   templateUrl: './employe-form.component.html',
+//   styleUrls: ['./employe-form.component.css']
+// })
+// export class EmployeFormComponent implements OnInit{
+
+//   employees: any[] = [];
+// successMessage: string = '';
+
+//   constructor(private employeService: EmployeService) {}
+
+//   ngOnInit() {
+//   this.loadEmployees();
+// }
+
+
+// loadEmployees() {
+//   this.employeService.getEmployees().subscribe((res: any[]) => {
+//     this.employees = res;
+//     console.log("Employees:", res);
+//   });
+// }
+
+//  onSubmit(form: NgForm) {
+//   if (form.valid) {
+
+//     console.log("Form Data:", form.value);
+
+//     this.employeService.addEmployee(form.value).subscribe({
+//       next: (res: any) => {
+//         console.log("Employee added:");
+//           alert("Employee added successfully! ✅");
+
+//         form.resetForm();
+
+//         this.loadEmployees();
+        
+//         // // Optional: auto-hide message after 3 sec
+//         // setTimeout(() => {
+//         //   this.successMessage = '';
+//         // }, 3000);  
+//       },
+//      error: (err: any) => {
+//       alert("API FAILED ❌");
+//   console.error("Full Error:", err);
+//   console.error("Status:", err.status);
+//   console.error("Message:", err.message);
+//   console.error("Error Body:", err.error);
+// }
+//     });
+
+//   } else {
+//     console.log("Form is invalid");
+//   }
+// }
+// }

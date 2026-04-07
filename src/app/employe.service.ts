@@ -7,12 +7,12 @@ export class EmployeService {
 
 
 
-  apiUrl = 'https://localhost:7120/api/EmpolyeeForm/InsertEmployee';
+  apiUrl = 'https://localhost:7120/api/EmpolyeeForm';
 
   constructor(private http: HttpClient) {}
 
   addEmployee(data: any) {
-    return this.http.post(this.apiUrl, data);
+    return this.http.post<any[]>('https://localhost:7120/api/EmpolyeeForm/InsertEmployee', data);
   }
 
   getEmployees() {
