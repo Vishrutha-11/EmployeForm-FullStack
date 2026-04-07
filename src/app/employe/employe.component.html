@@ -80,9 +80,18 @@
         </div>
 
         <!-- BUTTON -->
-        <button type="submit" [disabled]="empForm.invalid">Submit</button>
+        <button tyHpe="submit" [disabled]="empForm.invalid">Submit</button>
 
       </form>
+
+
+      <div *ngIf="successMessage" style="color:green;">
+  {{ successMessage }}
+</div>
+
+<div *ngIf="errorMessage" style="color:red;">
+  {{ errorMessage }}
+</div>
     </div>
   </div>
 
